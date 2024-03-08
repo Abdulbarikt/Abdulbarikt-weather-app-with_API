@@ -19,11 +19,9 @@ class WeatherServiceProvider extends ChangeNotifier {
   Future<void> fetchWeatherDataByCity(String city) async {
     _isloading = true;
     _error = "";
-    https: //api.openweathermap.org/data/2.5/weather?q=dubai&appid=ad93ec9d6bcf5c35eec3b3f597b82047&units=metric
     try {
       final String apiUrl =
-          "${APIEndPoints().cityUrl}${city}&appid=${APIEndPoints().apikey}${APIEndPoints().unit}";
-      //print(apiUrl);
+          "${APIEndPoints().cityUrl}$city&appid=${APIEndPoints().apikey}${APIEndPoints().unit}";
       final response = await http.get(Uri.parse(apiUrl));
 
       if (response.statusCode == 200) {
@@ -41,7 +39,6 @@ class WeatherServiceProvider extends ChangeNotifier {
       _error = "Failed to load data $e";
     } finally {
       _isloading = false;
-
     }
   }
 }
